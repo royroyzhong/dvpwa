@@ -43,7 +43,7 @@ jobs:
       - name: Dynamic Security Testing on Multiple URL
         uses: projectdiscovery/nuclei-action@main
         with:
-          urls: use: ./github/workflows/list.txt
+          urls: ./github/workflows/list.txt
 
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
