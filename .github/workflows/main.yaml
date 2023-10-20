@@ -39,7 +39,11 @@ jobs:
       #     target: http://localhost:8080
       #     flags: "-severity critical,high,medium,low -stats"
 
+      - uses: actions/checkout@v2
+      - name: Test access file
+        run: cat ./github/workflows/list.txt
 
+      - uses: actions/checkout@v2
       - name: Dynamic Security Testing on Multiple URL
         uses: projectdiscovery/nuclei-action@main
         with:
