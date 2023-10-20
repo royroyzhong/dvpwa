@@ -43,7 +43,6 @@ jobs:
         with:
           urls: http://localhost:8080
           flags: "-severity critical,high,medium,low -stats"
-          urls: list.txt      
 
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
