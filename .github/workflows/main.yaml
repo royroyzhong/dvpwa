@@ -33,12 +33,6 @@ jobs:
         with:
           target: http://localhost:8080
 
-      - name: Nuclei - Vulnerability Scan
-        uses: projectdiscovery/nuclei-action@main
-        with:
-          urls: http://localhost:8080
-          config: config.yaml
-          report-config: issues.yaml
       
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@v1.0.7
