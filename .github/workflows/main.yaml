@@ -33,11 +33,6 @@ jobs:
         with:
           target: http://localhost:8080
 
-      - name: Dynamic Security Testing on Multiple URL
-        uses: projectdiscovery/nuclei-action@main
-        with:
-          urls: dvpwa/.github/workflows/list.txt
-
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
         with:
@@ -47,15 +42,21 @@ jobs:
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
         with:
-          urls: http://localhost:8080
-          config: dvpwa/.github/workflows/config.yaml
-          report-config: issues.yaml
+          target: http://localhost:8080
+          user-agent: "User-Agent:'Nuclei - Vulnerability Scan (Have a nice day)'"
+          
+      - name: Dynamic Security Testing on Multiple URL
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          urls: ./list.txt
 
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
         with:
-          target: http://localhost:8080
-          user-agent: "User-Agent:'Nuclei - Vulnerability Scan (Have a nice day)'"
+          urls: http://localhost:8080
+          config: ./config.yaml
+          report-config: issues.yaml
+
 
       - name: Stop containers
         if: always()
