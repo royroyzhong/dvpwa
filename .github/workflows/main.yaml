@@ -36,7 +36,7 @@ jobs:
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
         with:
-          urls: http://localhost:8080
+          target: http://localhost:8080
           flags: "-severity critical,high,medium,low -stats"
 
       - name: Nuclei - Vulnerability Scan
@@ -44,7 +44,7 @@ jobs:
         with:
           target: http://localhost:8080
           user-agent: "User-Agent:'Nuclei - Vulnerability Scan (Have a nice day)'"
-          
+
       - name: Dynamic Security Testing on Multiple URL
         uses: projectdiscovery/nuclei-action@main
         with:
