@@ -42,6 +42,8 @@ jobs:
                     
       - name: Nuclei - Vulnerability Scan from nuclei-action
         uses: projectdiscovery/nuclei-action@v1.0.7
+        with:
+          target: http://localhost:8080
 
 
       # - uses: actions/checkout@v2
