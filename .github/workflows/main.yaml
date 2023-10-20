@@ -39,6 +39,10 @@ jobs:
           target: http://localhost:8080
           flags: "-severity critical,high,medium,low -stats"
 
+                    
+      - name: Nuclei - Vulnerability Scan from nuclei-action
+        uses: projectdiscovery/nuclei-action@v1.0.7
+
 
       # - uses: actions/checkout@v2
       # - name: Dynamic Security Testing on Multiple URL
