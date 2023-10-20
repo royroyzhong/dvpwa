@@ -28,33 +28,30 @@ jobs:
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
 
-      # - name: Dynamic Security Testing on Single URL
-      #   uses: projectdiscovery/nuclei-action@main
-      #   with:
-      #     target: http://localhost:8080
-
-      # - name: Nuclei - Vulnerability Scan Severity critical,high,medium,low
-      #   uses: projectdiscovery/nuclei-action@main
-      #   with:
-      #     target: http://localhost:8080
-      #     flags: "-severity critical,high,medium,low -stats"
-
-      - uses: actions/checkout@v2
-      - name: Test access file
-        run: cat ./github/workflows/list.txt
-
-      - uses: actions/checkout@v2
-      - name: Dynamic Security Testing on Multiple URL
+      - name: Dynamic Security Testing on Single URL
         uses: projectdiscovery/nuclei-action@main
         with:
-          urls: ./github/workflows/list.txt
+          target: http://localhost:8080
 
-      - name: Nuclei - Vulnerability Scan
+      - name: Nuclei - Vulnerability Scan Severity critical,high,medium,low
         uses: projectdiscovery/nuclei-action@main
         with:
-          urls: http://localhost:8080
-          config: ./config.yaml
-          report-config: issues.yaml
+          target: http://localhost:8080
+          flags: "-severity critical,high,medium,low -stats"
+
+
+      # - uses: actions/checkout@v2
+      # - name: Dynamic Security Testing on Multiple URL
+      #   uses: projectdiscovery/nuclei-action@main
+      #   with:
+      #     urls: ./github/workflows/list.txt
+
+      # - name: Nuclei - Vulnerability Scan
+      #   uses: projectdiscovery/nuclei-action@main
+      #   with:
+      #     urls: http://localhost:8080
+      #     config: config.yaml
+      #     report-config: issues.yaml
 
 
       - name: Stop containers
