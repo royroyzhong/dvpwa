@@ -28,26 +28,29 @@ jobs:
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
 
-      - name: Dynamic Security Testing
+      - name: Dynamic Security Testing on Single URL
         uses: projectdiscovery/nuclei-action@main
         with:
           target: http://localhost:8080
 
-      
-      - name: Nuclei - Vulnerability Scan
-        uses: projectdiscovery/nuclei-action@v1.0.7
+      - name: Dynamic Security Testing on Multiple URL
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          urls: list.txt        
 
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
         with:
           urls: http://localhost:8080
           flags: "-severity critical,high,medium,low -stats"
+
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
         with:
-          urls: urls.txt
-          user-agent: "User-Agent:'Nuclei - Vulnerability Scan (Have a nice day)'"
-                      
+          urls: http://localhost:8080
+          config: config.yaml
+          report-config: issues.yaml
+
       - name: Stop containers
         if: always()
         run: docker-compose -f "docker-compose.yml" down
