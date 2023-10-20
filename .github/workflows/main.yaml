@@ -1,7 +1,6 @@
 on: [push]
 
 jobs:
-
   # dependency_analysis:
   #   runs-on:  ubuntu-latest
   #   name: Test dependencies for security flaws
@@ -20,7 +19,6 @@ jobs:
   #       run: pip3 install semgrep && semgrep --config "p/ci" --error
   #       shell: bash
 
-  
   dynamic_security_testing:
     runs-on: ubuntu-latest
     name: Scan live web app for security flaws
@@ -35,6 +33,27 @@ jobs:
         with:
           target: http://localhost:8080
 
+      - name: Nuclei - Vulnerability Scan
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          urls: http://localhost:8080
+          config: config.yaml
+          report-config: issues.yaml
+      
+      - name: Nuclei - Vulnerability Scan
+        uses: projectdiscovery/nuclei-action@v1.0.7
+
+      - name: Nuclei - Vulnerability Scan
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          urls: http://localhost:8080
+          flags: "-severity critical,high,medium,low -stats"
+      - name: Nuclei - Vulnerability Scan
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          urls: urls.txt
+          user-agent: "User-Agent:'Nuclei - Vulnerability Scan (Have a nice day)'"
+                      
       - name: Stop containers
         if: always()
         run: docker-compose -f "docker-compose.yml" down
@@ -45,11 +64,11 @@ jobs:
   #   steps:
   #     - name: Checkout code
   #       uses: actions/checkout@v2
-      
+
   #     - name: Build an image from Dockerfile
   #       run: |
   #         docker build --file Dockerfile.app -t dvpwa.app:${{ github.sha }} .
-      
+
   #     - name: Run Trivy vulnerability scanner
   #       uses: aquasecurity/trivy-action@master
   #       with:
