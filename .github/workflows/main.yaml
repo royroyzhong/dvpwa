@@ -43,7 +43,7 @@ jobs:
       - name: Nuclei - Vulnerability Scan
         uses: projectdiscovery/nuclei-action@main
         with:
-          target: https://example.com
+          target: http://localhost:8080
           templates: STool/dvpwa/window-name-domxss.yaml
 
 
