@@ -44,7 +44,7 @@ jobs:
         uses: projectdiscovery/nuclei-action@main
         with:
           target: http://localhost:8080
-          templates: ../../window-name-domxss.yaml
+          templates: ls
 
 
       # - uses: actions/checkout@v2
