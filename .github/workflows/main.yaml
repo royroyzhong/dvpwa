@@ -28,10 +28,10 @@ jobs:
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
 
-      # - name: Dynamic Security Testing on Single URL
-      #   uses: projectdiscovery/nuclei-action@main
-      #   with:
-      #     target: http://localhost:8080
+      - name: Dynamic Security Testing on Single URL
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          target: http://localhost:8080 -headless
 
       # - name: Nuclei - Vulnerability Scan Severity critical,high,medium,low
       #   uses: projectdiscovery/nuclei-action@main
@@ -40,11 +40,6 @@ jobs:
       #     flags: "-severity critical,high,medium,low -stats"
 
                     
-      - name: Nuclei - Vulnerability Scan
-        uses: projectdiscovery/nuclei-action@main
-        with:
-          target: http://localhost:8080
-          templates: ls
 
 
       # - uses: actions/checkout@v2
